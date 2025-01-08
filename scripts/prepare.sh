@@ -93,6 +93,7 @@ if [ $stage -le 4 ] && [ $stop_stage -ge 4 ]; then
   log "Stage 4: Prepare and compute feature for nihaowenwen."
   for part in test dev train; do
     if [ ! -e ${CN_dir}/nihaowenwen/.${part}.done ]; then
+      mkdir -p ${CN_dir}/nihaowenwen/${part}
       cat ${CN_dir}/nihaowenwen/utt_ids.${part} | awk '{print $1"\t你好问问"}' > ${CN_dir}/nihaowenwen/${part}/text
       cat ${CN_dir}/nihaowenwen/utt_ids.${part} | awk '{print $1"\tCN/nihaowenwen/wavs/"$1".wav"}' > ${CN_dir}/nihaowenwen/${part}/wav.scp
       cat ${CN_dir}/nihaowenwen/utt_ids.${part} | awk '{print $1"\t"$1"\t0\t-1"}' > ${CN_dir}/nihaowenwen/${part}/segments
@@ -114,6 +115,7 @@ if [ $stage -le 5 ] && [ $stop_stage -ge 5 ]; then
   log "Stage 5: Prepare and compute feature for xiaoyun."
   for part in clean noisy; do
     if [ ! -e ${CN_dir}/xiaoyun/.${part}.done ]; then
+      mkdir -p ${CN_dir}/xiaoyun/${part}
       cat ${CN_dir}/xiaoyun/utt_id.${part} | awk '{print $1"\t小云小云"}' > ${CN_dir}/xiaoyun/${part}/text
       cat ${CN_dir}/xiaoyun/utt_id.${part} | awk '{print $1"\tCN/xiaoyun/wavs/"$1".wav"}' > ${CN_dir}/xiaoyun/${part}/wav.scp
       cat ${CN_dir}/xiaoyun/utt_id.${part} | awk '{print $1"\t"$1"\t0\t-1"}' > ${CN_dir}/xiaoyun/${part}/segments
